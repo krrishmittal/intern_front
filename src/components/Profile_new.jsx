@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDarkMode } from '../App';
+import { API_ENDPOINTS, getAuthHeaders, buildApiUrl } from '../config/api';
 
 const Profile = () => {
   const { isDarkMode } = useDarkMode();
@@ -28,12 +29,9 @@ const Profile = () => {
       let isAuthenticated = true;
 
       try {
-        const userResponse = await fetch('http://localhost:4000/auth/profile', {
+        const userResponse = await fetch(API_ENDPOINTS.PROFILE, {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
+          headers: getAuthHeaders(),
           credentials: 'include',
           signal,
         });
@@ -61,9 +59,9 @@ const Profile = () => {
 
       // Fetch skills
       try {
-        const skillsResponse = await fetch('http://localhost:4000/auth/profile/skills', {
+        const skillsResponse = await fetch(API_ENDPOINTS.PROFILE_SKILLS, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           credentials: 'include',
           signal,
         });
@@ -84,9 +82,9 @@ const Profile = () => {
 
       // Fetch projects
       try {
-        const projectsResponse = await fetch('http://localhost:4000/auth/profile/projects', {
+        const projectsResponse = await fetch(API_ENDPOINTS.PROFILE_PROJECTS, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
+          headers: getAuthHeaders(),
           credentials: 'include',
           signal,
         });
@@ -119,11 +117,9 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/auth/profile/skills', {
+      const response = await fetch(API_ENDPOINTS.PROFILE_SKILLS, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: getAuthHeaders(),
         credentials: 'include',
         body: JSON.stringify({ skill: newSkill }),
       });
@@ -144,12 +140,9 @@ const Profile = () => {
   const handleUpdateSkills = async () => {
     const updatedSkills = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill);
     try {
-      const response = await fetch('http://localhost:4000/auth/profile/skills', {
+      const response = await fetch(API_ENDPOINTS.PROFILE_SKILLS, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
+        headers: getAuthHeaders(),
         credentials: 'include',
         body: JSON.stringify({ skills: updatedSkills }),
       });
@@ -169,11 +162,9 @@ const Profile = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch('http://localhost:4000/auth/profile', {
+      const response = await fetch(API_ENDPOINTS.PROFILE, {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
       if (response.ok) {
@@ -213,11 +204,9 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/auth/profile', {
+      const response = await fetch(API_ENDPOINTS.PROFILE, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify({
           username,
           password,
@@ -245,11 +234,9 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/auth/profile/projects', {
+      const response = await fetch(API_ENDPOINTS.PROFILE_PROJECTS, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: getAuthHeaders(),
         credentials: 'include',
         body: JSON.stringify(newProject),
       });
@@ -274,9 +261,9 @@ const Profile = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:4000/auth/profile/projects', {
+      const response = await fetch(API_ENDPOINTS.PROFILE_PROJECTS, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
 
@@ -299,11 +286,9 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/auth/profile/projects/${editingProject._id}`, {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.PROFILE_PROJECTS, editingProject._id), {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: getAuthHeaders(),
         credentials: 'include',
         body: JSON.stringify(editProjectData),
       });
@@ -326,11 +311,9 @@ const Profile = () => {
 
   const handleDeleteProject = async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:4000/auth/profile/projects/${projectId}`, {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.PROFILE_PROJECTS, projectId), {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: getAuthHeaders(),
         credentials: 'include',
       });
 

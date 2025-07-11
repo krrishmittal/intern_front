@@ -71,7 +71,8 @@ function Dashboard() {
                 opportunity._id === updatedOpportunity.id ? { ...opportunity, ...updatedOpportunity } : opportunity
             )
         );
-        toast.success("Application updated successfully");
+        // Toast removed to avoid duplicate notifications
+        // The toast is already shown in ApplicationPopup.jsx
     };
 
     const countByStatus = (status) => {

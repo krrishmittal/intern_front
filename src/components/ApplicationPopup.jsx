@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDarkMode } from "../App";
+import { API_ENDPOINTS, buildApiUrl, getAuthHeaders, getFileUploadHeaders } from "../config/api";
 function ApplicationPopup({ opportunity, onClose, isEditing = false, onUpdate, onApplicationSuccess }) {
   const [fullName, setFullName] = useState(isEditing ? (opportunity.fullName || "") : "");
   const [email, setEmail] = useState(isEditing ? (opportunity.email || "") : "");
@@ -42,6 +43,13 @@ function ApplicationPopup({ opportunity, onClose, isEditing = false, onUpdate, o
     setIsSubmitting(true);
     
     const token = localStorage.getItem("token");
+    
+    // Check if user is logged in
+    if (!token) {
+      toast.error('Please log in to submit an application');
+      navigate('/login');
+      return;
+    }
     if (!token) {
       toast.error("Login to apply for Opportunity");
       navigate("/login");
@@ -83,23 +91,39 @@ function ApplicationPopup({ opportunity, onClose, isEditing = false, onUpdate, o
     }
     
     try {
+      // Use centralized API endpoints
       const url = isEditing 
-        ? `http://localhost:4000/auth/applied/${opportunity._id}`
-        : "http://localhost:4000/auth/apply";
+        ? buildApiUrl(API_ENDPOINTS.APPLIED, opportunity._id)
+        : API_ENDPOINTS.APPLY;
       
+      console.log(`Submitting application to: ${url}`);
       const method = isEditing ? "PUT" : "POST";
       
       const response = await fetch(url, {
         method: method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // Use specialized headers for file upload (Content-Type is omitted)
+        headers: getFileUploadHeaders(),
         body: formData,
         credentials: "include",
       });
       
+      // Log response status for debugging
+      console.log(`Application response status: ${response.status}`);
+      
       if (!response.ok) {
-        const errorData = await response.json();
+        // Try to get error details if available
+        const errorData = await response.json().catch(() => ({ 
+          message: `Server returned ${response.status}: ${response.statusText}` 
+        }));
+        
+        if (response.status === 401) {
+          // Special handling for authentication issues
+          toast.error('Authentication failed. Please log in again.');
+          localStorage.removeItem('token'); // Clear invalid token
+          navigate('/login');
+          throw new Error('Authentication failed');
+        }
+        
         throw new Error(errorData.message || `${isEditing ? 'Update' : 'Application'} failed`);
       }
       

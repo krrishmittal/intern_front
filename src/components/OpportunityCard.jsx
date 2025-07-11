@@ -241,7 +241,7 @@ function OpportunityCard({ opportunity }) {
           onClose={() => setShowPopup(false)} 
           onApplicationSuccess={() => {
             setHasApplied(true);
-            toast.success("Application submitted successfully!");
+            // Toast removed from here to avoid duplication
           }}
         />
       )}

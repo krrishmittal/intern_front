@@ -76,4 +76,16 @@ export const getAuthHeaders = () => {
   };
 };
 
+/**
+ * Helper function for file uploads - doesn't set Content-Type
+ * @returns {Object} Headers for file upload requests
+ */
+export const getFileUploadHeaders = () => {
+  const token = localStorage.getItem('token');
+  return {
+    'Authorization': token ? `Bearer ${token}` : '',
+    // Content-Type is deliberately omitted to let the browser set it with the boundary parameter
+  };
+};
+
 export default API_CONFIG;
