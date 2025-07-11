@@ -1,0 +1,16 @@
+/* Additional styles for the internship portal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Custom styles that complement Tailwind */
+.toast-container {
+  z-index: 9999;
+}
+
+/* Ensure proper spacing for toast notifications */
+.Toastify__toast-container {
+  margin-top: 4rem;
+}

@@ -1,0 +1,130 @@
+{
+  "internships_meta": {
+    "1": {
+      "id": 1,
+      "title": "Software Developer Intern",
+      "company_name": "Tech Innovators Inc",
+      "locations": [
+        {
+          "string": "San Francisco, CA",
+          "link": "",
+          "country": "United States",
+          "region": "California",
+          "locationName": "San Francisco"
+        }
+      ],
+      "stipend": {
+        "salary": "₹25,000/month",
+        "currency": "INR"
+      },
+      "duration": "6 months",
+      "type": "Full-time",
+      "profile_name": "Software Development"
+    },
+    "2": {
+      "id": 2,
+      "title": "Digital Marketing Intern",
+      "company_name": "Marketing Solutions Ltd",
+      "locations": [
+        {
+          "string": "Remote",
+          "link": "",
+          "country": "Global",
+          "region": "Remote",
+          "locationName": "Remote"
+        }
+      ],
+      "stipend": {
+        "salary": "₹15,000/month",
+        "currency": "INR"
+      },
+      "duration": "3 months",
+      "type": "Part-time",
+      "profile_name": "Digital Marketing"
+    },
+    "3": {
+      "id": 3,
+      "title": "Data Analyst Intern",
+      "company_name": "DataCorp Analytics",
+      "locations": [
+        {
+          "string": "Mumbai, India",
+          "link": "",
+          "country": "India",
+          "region": "Maharashtra",
+          "locationName": "Mumbai"
+        }
+      ],
+      "stipend": {
+        "salary": "₹20,000/month",
+        "currency": "INR"
+      },
+      "duration": "4 months",
+      "type": "Full-time",
+      "profile_name": "Data Analysis"
+    },
+    "4": {
+      "id": 4,
+      "title": "UI/UX Design Intern",
+      "company_name": "Creative Studios",
+      "locations": [
+        {
+          "string": "Bangalore, India",
+          "link": "",
+          "country": "India",
+          "region": "Karnataka",
+          "locationName": "Bangalore"
+        }
+      ],
+      "stipend": {
+        "salary": "₹18,000/month",
+        "currency": "INR"
+      },
+      "duration": "5 months",
+      "type": "Full-time",
+      "profile_name": "UI/UX Design"
+    },
+    "5": {
+      "id": 5,
+      "title": "Content Writing Intern",
+      "company_name": "Content Creators Hub",
+      "locations": [
+        {
+          "string": "Remote",
+          "link": "",
+          "country": "Global",
+          "region": "Remote",
+          "locationName": "Remote"
+        }
+      ],
+      "stipend": {
+        "salary": "₹12,000/month",
+        "currency": "INR"
+      },
+      "duration": "3 months",
+      "type": "Part-time",
+      "profile_name": "Content Writing"
+    },
+    "6": {
+      "id": 6,
+      "title": "Machine Learning Intern",
+      "company_name": "AI Solutions Inc",
+      "locations": [
+        {
+          "string": "Hyderabad, India",
+          "link": "",
+          "country": "India",
+          "region": "Telangana",
+          "locationName": "Hyderabad"
+        }
+      ],
+      "stipend": {
+        "salary": "₹30,000/month",
+        "currency": "INR"
+      },
+      "duration": "6 months",
+      "type": "Full-time",
+      "profile_name": "Machine Learning"
+    }
+  }
+}
